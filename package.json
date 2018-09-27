@@ -1,0 +1,25 @@
+{
+  "name": "koa-decorator",
+  "version": "1.0.0",
+  "description": "为TS开发的Koa应用提供装饰器",
+  "main": "app.ts",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "koa装饰器"
+  ],
+  "author": "刘培",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.46",
+    "@types/koa-router": "^7.0.32",
+    "typescript": "^3.0.3"
+  }
+}
