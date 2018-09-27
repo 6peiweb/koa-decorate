@@ -1,10 +1,10 @@
-class ConfigError extends Error {
+export class ConfigError extends Error {
   public name: string;
 
   constructor(message: string) {
-      super(message)
+      super(message);
       this.name = 'ConfigError';
   }
-}
+};
 
 export default { ConfigError };
