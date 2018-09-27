@@ -6,6 +6,10 @@
   "keywords": [
     "koa装饰器"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/6peiweb/koa-decorator.git"
+  },
   "author": "刘培",
   "license": "ISC",
   "dependencies": {
