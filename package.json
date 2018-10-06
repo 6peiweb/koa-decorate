@@ -1,14 +1,18 @@
 {
-  "name": "koa-decorator",
-  "version": "0.0.1",
+  "name": "koa-decorate",
+  "version": "0.1.1",
   "description": "为TS开发的Koa应用提供装饰器",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
   "keywords": [
     "koa装饰器"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/6peiweb/koa-decorator.git"
+    "url": "git+https://github.com/6peiweb/koa-decorate.git"
   },
   "author": "刘培",
   "license": "ISC",
