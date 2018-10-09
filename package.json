@@ -19,6 +19,10 @@
   },
   "author": "liupei",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/6peiweb/koa-decorate/issues"
+  },
+  "homepage": "https://github.com/6peiweb/koa-decorate#readme",
   "dependencies": {
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
