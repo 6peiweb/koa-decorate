@@ -1,7 +1,7 @@
 {
   "name": "koa-decorate",
   "version": "0.1.2",
-  "description": "Provides decorators for router middleware of koa.",
+  "description": "🔥 Provides decorators for router middleware of koa.",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
