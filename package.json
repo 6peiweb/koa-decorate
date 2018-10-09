@@ -22,7 +22,6 @@
   "dependencies": {
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
-    "nodemon": "^1.18.4",
     "reflect-metadata": "^0.1.10",
     "typescript": "^3.0.3"
   },
