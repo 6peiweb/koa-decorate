@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/6peiweb/koa-decorate.git"
   },
-  "author": "刘培",
+  "author": "liupei",
   "license": "MIT",
   "dependencies": {
     "koa": "^2.5.3",
