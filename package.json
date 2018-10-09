@@ -1,0 +1,34 @@
+{
+  "name": "koa-decorate",
+  "version": "0.1.2",
+  "description": "Provides decorators for router middleware of koa.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "koa",
+    "router",
+    "decorator",
+    "reflect-metadata"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/6peiweb/koa-decorate.git"
+  },
+  "author": "刘培",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0",
+    "nodemon": "^1.18.4",
+    "reflect-metadata": "^0.1.10",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.46",
+    "@types/koa-router": "^7.0.32",
+    "@types/reflect-metadata": "^0.0.5"
+  }
+}
