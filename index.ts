@@ -2,12 +2,12 @@ import 'reflect-metadata';
 import Router from 'koa-router';
 
 import Utils from './utils';
-import { Path } from './decorators/path';
-import { Get, Post, Put, Delete, All } from './decorators/http-method';
-import { Param, Query, Body, Ctx, Next } from './decorators/param';
-import { Before, After} from './decorators/hooks';
-import { httpMethodSymbolKey } from './decorators/http-method';
-import { rootPathSymbolKey, routeSymbolKey, pathSymbolKey} from './decorators/path';
+import { Path } from './decorator/path';
+import { Get, Post, Put, Delete, All } from './decorator/http-method';
+import { Param, Query, Body, Ctx, Next } from './decorator/parameter';
+import { Before, After} from './decorator/hook';
+import { httpMethodSymbolKey } from './decorator/http-method';
+import { rootPathSymbolKey, routeSymbolKey, pathSymbolKey} from './decorator/path';
 
 export default class Decorator {
   private router: Router;
@@ -22,12 +22,12 @@ export default class Decorator {
     this.controllers = controllers;
   }
 
-  create () {
+  public routes () {
     Utils.Type.objToArr(this.controllers).map(controller => this.addRoutes(controller));
     return this.router.routes();
   }
 
-  addRoutes (Controller) {
+  private addRoutes (Controller) {
 
     const instance     = new Controller();
     const rootPath     = Reflect.getMetadata(rootPathSymbolKey, Controller.prototype);

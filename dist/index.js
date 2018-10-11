@@ -6,25 +6,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const koa_router_1 = __importDefault(require("koa-router"));
 const utils_1 = __importDefault(require("./utils"));
-const path_1 = require("./decorators/path");
+const path_1 = require("./decorator/path");
 exports.Path = path_1.Path;
-const http_method_1 = require("./decorators/http-method");
+const http_method_1 = require("./decorator/http-method");
 exports.Get = http_method_1.Get;
 exports.Post = http_method_1.Post;
 exports.Put = http_method_1.Put;
 exports.Delete = http_method_1.Delete;
 exports.All = http_method_1.All;
-const param_1 = require("./decorators/param");
+const param_1 = require("./decorator/param");
 exports.Param = param_1.Param;
 exports.Query = param_1.Query;
 exports.Body = param_1.Body;
 exports.Ctx = param_1.Ctx;
 exports.Next = param_1.Next;
-const hooks_1 = require("./decorators/hooks");
-exports.Before = hooks_1.Before;
-exports.After = hooks_1.After;
-const http_method_2 = require("./decorators/http-method");
-const path_2 = require("./decorators/path");
+const hook_1 = require("./decorator/hook");
+exports.Before = hook_1.Before;
+exports.After = hook_1.After;
+const http_method_2 = require("./decorator/http-method");
+const path_2 = require("./decorator/path");
 class Decorator {
     constructor(options) {
         const { router, controllers } = options;
@@ -34,7 +34,7 @@ class Decorator {
         this.router = router || new koa_router_1.default();
         this.controllers = controllers;
     }
-    create() {
+    routes() {
         utils_1.default.Type.objToArr(this.controllers).map(controller => this.addRoutes(controller));
         return this.router.routes();
     }

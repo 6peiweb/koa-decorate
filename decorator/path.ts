@@ -1,5 +1,5 @@
-import { paramSymbolKey, querySymbolKey, bodySymbolKey, ctxSymbolKey, nextSymbolKey } from './param';
-import { beforeSymbolKey, afterSymbolKey } from './hooks';
+import { paramSymbolKey, querySymbolKey, bodySymbolKey, ctxSymbolKey, nextSymbolKey } from './parameter';
+import { beforeSymbolKey, afterSymbolKey } from './hook';
 
 export const rootPathSymbolKey    = Symbol.for('rootPath');
 export const rootAuthSymbolKey    = Symbol.for('rootAuth');
