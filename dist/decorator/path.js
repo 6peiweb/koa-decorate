@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const param_1 = require("./param");
+const parameter_1 = require("./parameter");
 const hook_1 = require("./hook");
 exports.rootPathSymbolKey = Symbol.for('rootPath');
 exports.rootAuthSymbolKey = Symbol.for('rootAuth');
@@ -45,15 +45,15 @@ exports.Path = (path, authFunc) => {
                     }
                 }
                 const args = [];
-                const param = Reflect.getMetadata(param_1.paramSymbolKey, target, propertyKey);
+                const param = Reflect.getMetadata(parameter_1.paramSymbolKey, target, propertyKey);
                 param && Object.keys(param).map(key => args[param[key]] = ctx.params[key]);
-                const query = Reflect.getMetadata(param_1.querySymbolKey, target, propertyKey);
+                const query = Reflect.getMetadata(parameter_1.querySymbolKey, target, propertyKey);
                 query && Object.keys(query).map(key => args[query[key]] = ctx.query);
-                const body = Reflect.getMetadata(param_1.bodySymbolKey, target, propertyKey);
+                const body = Reflect.getMetadata(parameter_1.bodySymbolKey, target, propertyKey);
                 body && Object.keys(body).map(key => args[body[key]] = ctx.request.body);
-                const ctx1 = Reflect.getMetadata(param_1.ctxSymbolKey, target, propertyKey);
+                const ctx1 = Reflect.getMetadata(parameter_1.ctxSymbolKey, target, propertyKey);
                 ctx1 && Object.keys(ctx1).map(key => args[ctx1[key]] = ctx);
-                const next1 = Reflect.getMetadata(param_1.nextSymbolKey, target, propertyKey);
+                const next1 = Reflect.getMetadata(parameter_1.nextSymbolKey, target, propertyKey);
                 next1 && Object.keys(next1).map(key => args[next1[key]] = next);
                 const before = Reflect.getMetadata(hook_1.beforeSymbolKey, target, propertyKey);
                 before && typeof before === 'function' && before(ctx, next);
