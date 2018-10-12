@@ -272,6 +272,11 @@ export default {
 
 ```
 
+
+## Example
+
+[koa-app](https://github.com/6peiweb/koa-app)
+
 ## Licences
 
 [MIT](LICENSE)
