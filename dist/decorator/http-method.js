@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.httpMethodSymbolKey = Symbol.for('httpMethod');
-const [Get, Post, Put, Delete, All] = ['get', 'post', 'put', 'deletc', 'all'].map((method) => {
+const [Get, Post, Put, Delete, All] = ['get', 'post', 'put', 'delete', 'all'].map((method) => {
     return (target, propertyKey) => {
         Reflect.defineMetadata(exports.httpMethodSymbolKey, method, target, propertyKey);
     };

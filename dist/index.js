@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const koa_router_1 = __importDefault(require("koa-router"));
-const utils_1 = __importDefault(require("./utils"));
 const path_1 = require("./decorator/path");
 exports.Path = path_1.Path;
 const http_method_1 = require("./decorator/http-method");
@@ -29,13 +28,13 @@ class Decorator {
     constructor(options) {
         const { router, controllers } = options;
         if (!controllers) {
-            throw new utils_1.default.Error.ConfigError('There is no configuration properties "controllers"');
+            throw new Error('There is no configuration properties "controllers"');
         }
         this.router = router || new koa_router_1.default();
         this.controllers = controllers;
     }
     routes() {
-        utils_1.default.Type.objToArr(this.controllers).map(controller => this.addRoutes(controller));
+        Object.values(this.controllers).map(controller => this.addRoutes(controller));
         return this.router.routes();
     }
     addRoutes(Controller) {
