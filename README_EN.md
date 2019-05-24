@@ -10,21 +10,21 @@
 [es7-decorator-url]: https://github.com/wycats/javascript-decorators
 [ts-node-url]: https://github.com/TypeStrong/ts-node
 
-> 为 [koa-router](https://github.com/ZijianHe/koa-router) 提供装饰器。
+> Provides decorators for router middleware of [koa](https://github.com/koajs/koa).
 
-## 安装
+## Install
 
 [![NPM](https://nodei.co/npm/koa-decorate.png?downloads=true)](https://nodei.co/npm/koa-decorate/)
 
-## 应用配置
-> Koa-decorate 基于 [es7][es7-decorator-url] 提供的装饰器， 
-但是 NodeJs 暂时不支持装饰器语法糖。
-所以我们需要使用 TypeScript 开发我们的应用, 
-我们可以通过 [ts-node][ts-node-url] 直接运行 TypeScript，无需通过线下先编译。
+## Config
+> Koa-decorate is based on the decorator provided by [es7][es7-decorator-url], 
+but nodejs does not support the decorator temporarily. 
+so we need to use typescript to develop our application, 
+we can run our typescript directly through [ts-node][ts-node-url] without offline compiling.
 ```sh
 npm install --save-dev ts-node nodemon
 ```
-*配置 nodemon.json*
+*nodemon.json*
 ```json
 {
   "restartable": "rs",
@@ -44,7 +44,7 @@ npm install --save-dev ts-node nodemon
 }
 ```
 
-## API 使用说明
+## API Reference
 
 * [koa-decorate](#module_koa-decorate)
     * [Decorator](#module_koa-decorate--Decorator) ⏏
@@ -61,27 +61,27 @@ npm install --save-dev ts-node nodemon
 <a name="module_koa-router--Decorator"></a>
 
 ### Decorator
-**类别**： 工厂类
+**Kind**: Exported class
 <a name="module_koa-router--Decorator_new"></a>
 
 #### new Decorator([opts])
-创建一个 koa-decorate 实例。
+Create a new decorated router.
 
-| 参数                | 类别                | 描述              |
-| ---                | ---                 | ---              |
-| [opts]             | <code>Object</code> |                  |
-| [opts.router]      | <code>Object</code> | koa-router 实例   |
-| [opts.controllers] | <code>Object</code> | 路由控制器类       |
+| Param              | Type                | Description              |
+| ---                | ---                 | ---                      |
+| [opts]             | <code>Object</code> |                          |
+| [opts.router]      | <code>Object</code> | koa-router instance      |
+| [opts.controllers] | <code>Object</code> | route controller classes |
 
 <a name="module_koa-decorate--Decorator+routes"></a>
 
 #### Decorator.routes ⇒ <code>function</code>
-该方法用来装载控制器，并派发与请求想匹配的路由，返回一个 koa 中间件。
+Returns router middleware which dispatches a route matching the request.
 
-**类别**： <code>[Decorator](#module_koa-router--Decorator_new)</code> 的实例属性。 
+**Kind**: instance property of <code>[Decorator](#module_koa-router--Decorator_new)</code>  
 
-**举例**  
-基础用法:
+**Example**  
+Basic usage:
 
 ```typescript
 // app.ts
@@ -89,7 +89,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import Decorator from 'koa-decorate';
 
-import Controller from './controller'; // 路由控制器类
+import Controller from './controller'; // Route controller classes
 
 const routes = new Decorator({
   router: new Router(),
@@ -101,11 +101,12 @@ app.use(routes);
 <a name="module_koa-decorate--Http_method"></a>
 
 #### http-method ⇒ <code>@Get|@Post|@Put|@Delete|@All</code>
-创建 `@Verb` 方法来匹配 HTTP 方法，*Verb* 是 HTTP 动词中的一个，像 `@Get` or `@Post` 等。
+Create `@Verb` methods to match against HTTP methods, where *Verb* is one of the HTTP verbs 
+such as `@Get` or `@Post` etc.
 
-另外, `@All` 可以与所有的 HTTP 方法相匹配。
+Additionaly, `@All` can be used to match against all methods.
 
-**举例**  
+**Example**  
 
 ```typescript
 // CatController.ts
@@ -143,14 +144,15 @@ export { CatController };
 <a name="module_koa-decorate--Path"></a>
 
 #### path ⇒ <code>@Path</code>
-将 URL 与回调函数或控制器相匹配使用 `@Path`，当 `authFunc` 返回 *true* ，控制器可以执行逻辑操作，否则拒绝访问。
+Match URL patterns to callback functions or controller actions using `@Path`,
+when `authFunc` returns *true*, controller can execute logical actions, otherwise access denied. 
 
-| 参数        | 类别                             | 描述               |
-| ---        | ---                              | ---               |
-| path       | <code>String</code>              |                   |
-| [authFunc] | <code>Function => Boolean</code> | 验证回调函数，非必须 |
+| Param      | Type                             | Description    |
+| ---        | ---                              | ---            |
+| path       | <code>String</code>              |                |
+| [authFunc] | <code>Function => Boolean</code> | route callback |
 
-**举例**  
+**Example**  
 
 ```typescript
 // CatController.ts
@@ -175,13 +177,14 @@ export { CatController };
 <a name="module_koa-decorate--Parameter"></a>
 
 #### parameter ⇒ <code>@Param|@Query|@Body|@Ctx|@Next</code>
-`@Parameter` 类型的装饰器用来修饰 URL 中的参数或 koa 回调路由回调中的参数，*Parameter* 可以是 `@Param`、 `@Query`、 `@Body`、 `@Ctx`、 `@Next` 中的一个。（函数形参修饰器只有 *TypeScript* 支持）
+Create `@Parameter` decorators, where *Parameter* is one of the parameter-names such
+as `@Param`, `@Query`, `@Body` etc.
 
-| 参数        | 类别                |描述       |
-| ---        | ---                 | ---      |
-| name       | <code>String</code> |          |
+| Param      | Type                | Description    |
+| ---        | ---                 | ---            |
+| name       | <code>String</code> |                |
 
-**举例**  
+**Example**  
 
 ```typescript
 // CatController.ts
@@ -217,13 +220,14 @@ export { CatController };
 <a name="module_koa-decorate--Hook"></a>
 
 #### hook ⇒ <code>@Before|@After</code>
-当 URL 与路由匹配正确后，在执行控制器逻辑前会先执行 `@Before`的 *hookFunc* ，处理完控制器逻辑后会执行 `@After` 的 *hookFunc*。
+When the routing match is correct, the *hookFunc* is used to deal with 
+the transactions `@Before` and `@After` processing.
 
-| 参数       | 类别                   | 描         |
-| ---        | ---                   | ---       |
-| [hookFunc] | <code>Function</code> | 回调钩子   |
+| Param      | Type                  | Description    |
+| ---        | ---                   | ---            |
+| [hookFunc] | <code>Function</code> | callback hook  |
 
-**举例**  
+**Example**  
 
 ```typescript
 // CatController.ts
@@ -254,7 +258,7 @@ export { CatController };
 <a name="module_koa-router--Controller"></a>
 
 ### Controller
-**Kind**: 导出一个路由控制器集合的 *HashMap* 。
+**Kind**: The dictionary of route controller classes
 
 **Example**  
 
@@ -269,7 +273,7 @@ export default {
 ```
 
 
-## 示例
+## Example
 
 [koa-app](https://github.com/6peiweb/koa-app)
 
