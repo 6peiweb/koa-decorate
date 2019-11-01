@@ -1,6 +1,6 @@
 {
-  "name": "@cs/koa-decorate",
-  "version": "0.2.4",
+  "name": "koa-decorate",
+  "version": "0.2.5",
   "description": "🔥 Provides decorators for router middleware of Koa .",
   "main": "dist/index.js",
   "scripts": {

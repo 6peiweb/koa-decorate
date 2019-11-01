@@ -24,21 +24,17 @@
 ```sh
 npm install --save-dev ts-node nodemon
 ```
-*配置 nodemon.json*
+*配置 nodemon.json (使用详情请查看[koa-app](https://github.com/6peiweb/koa-app)) *
 ```json
 {
   "restartable": "rs",
-  "ignore": [
-    ".git",
-    "node_modules"
-  ],
   "verbose": true,
   "execMap": {
-    "ts": "ts-node"
+	"ts": "ts-node",
+	"js": "node"
   },
   "watch": [
-    "controller",
-    "app.ts"
+    "src"
   ],
   "ext": "ts"
 }
@@ -91,12 +87,12 @@ import Decorator from 'koa-decorate';
 
 import Controller from './controller'; // 路由控制器类
 
-const routes = new Decorator({
-  router: new Router(),
-  controllers: Controller
-}).routes();
+const router = new Decorator({
+    router: new Router(),
+  	controllers: Controller
+});
 
-app.use(routes);
+app.use(router.routes());
 ```
 <a name="module_koa-decorate--Http_method"></a>
 
@@ -114,27 +110,29 @@ import { Path, Get, Post } from 'koa-decorate';
 @Path('/api/cat')
 class CatController {
 
-  @Get
-  @Path('/info')
-  getCatInfo () {
-    return {
-      id: 1,
-      name: 'Lina Weiss',
-      type: 'Norwegian Forest Cat'
-    }
+  	@Get
+  	@Path('/info')
+  	async getCatInfo () {
+    	return await new Promise(resolve => {
+			setTimeout(() => resolve({
+				id: 1,
+				name: 'Lina Weiss',
+				type: 'Norwegian Forest Cat',
+			}), 1000);
+    	})
   }
 
-  @Post
-  @Path('/info/')
-  CreateCat () {
-    return {
-      status: 200,
-      data: {
-        id: 2
-      },
-      message: 'Created successfully...'
-    }
-  }
+	@Post
+	@Path('/info/')
+	async CreateCat () {
+		return {
+			status: 200,
+			data: {
+				id: 2
+			},
+			message: 'Created successfully...',
+		};
+	}
 
 }
 
@@ -159,15 +157,15 @@ import { Path, Get } from 'koa-decorate';
 @Path('/api/cat')
 class CatController {
 
-  @Get
-  @Path('/info/:id', (ctx) => Number(ctx.params.id) === 1)
-  getCatInfo () {
-    return {
-      id: 1,
-      name: 'Lina Weiss',
-      type: 'Norwegian Forest Cat'
-    }
-  }
+  	@Get
+  	@Path('/info/:id', (ctx) => Number(ctx.params.id) === 1)
+  	async getCatInfo () {
+    	return {
+      		id: 1,
+      		name: 'Lina Weiss',
+      		type: 'Norwegian Forest Cat'
+    	};
+	}
 }
 
 export { CatController };
@@ -190,25 +188,25 @@ import { Path, Get, Post, Param, Query, Body, Ctx } from 'koa-decorate';
 @Path('/api/cat')
 class CatController {
 
-  @Get
-  @Path('/info/:type')
-  getCatInfo (
-      @Param('type') type: string,
-      @Query('info') info: string) {
-    return { type, info }
-  }
+  	@Get
+  	@Path('/info/:type')
+  	async getCatInfo (@Param('type') type: string,
+				@Query('info') info: string,
+	) {
+    	return { type, info };
+  	}
 
-  @Post
-  @Path('/info/:type')
-  CreateCat (
-      @Param('type') type: string,
-      @Body('requestBody') requestBody: any) {
-    return {
-      status: 200,
-      data: Object.assign(requestBody, { type }),
-      message: 'Created successfully...'
-    }
-  }
+  	@Post
+  	@Path('/info/:type')
+  	async CreateCat (@Param('type') type: string,
+				 @Body('requestBody') requestBody: any,
+	) {
+    	return {
+      		status: 200,
+      		data: Object.assign(requestBody, { type }),
+      		message: 'Created successfully...',
+    	};
+  	}
 
 }
 
@@ -232,20 +230,19 @@ import { Path, Get, Param, Query, Before, After } from 'koa-decorate';
 @Path('/api/cat')
 class CatController {
 
-  @Get
-  @Path('/info/:type')
-  @Before((ctx, next) => {
+  	@Get
+  	@Path('/info/:type')
+  	@Before((ctx, next) => {
+    	// ...
+  	})
+  	@After((ctx, next) => {
     // ...
-  })
-  @After((ctx, next) => {
-    // ...
-  })
-  getCatInfo (
-      @Param('type') type: string,
-      @Query('info') info: string) {
-    return { type, info }
-  }
-
+  	})
+	async getCatInfo (@Param('type') type: string,
+				  @Query('info') info: string,
+	) {
+    	return { type, info };
+  	}
 }
 
 export { CatController };
